@@ -2,4 +2,15 @@ module.exports = class Version
   brunchPlugin: yes
 
   constructor: (@config) ->
-    null
+
+    # Defaults options
+    @options = {
+      file: 'version'
+      ignore: /[\\/][.]/
+    }
+
+    # Merge config
+    cfg = @config.plugins?.version ? {}
+    @options[k] = cfg[k] for k of cfg
+
+  onCompile: ->

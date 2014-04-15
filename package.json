@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "description": "Adds app version support to brunch.",
   "author": "Andrej Debeljak",
-  "homepage": "https://github.com/andrejdeb/version-brunch",
+  "homepage": "https://github.com/AndrejD/version-brunch",
   "repository": {
     "type": "git",
-    "url": "git@github.com:andrejdeb/version-brunch.git"
+    "url": "git@github.com:AndrejD/version-brunch.git"
   },
   "main": "./lib/index",
   "scripts": {

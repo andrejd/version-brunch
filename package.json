@@ -10,12 +10,6 @@
   },
   "main": "./lib/index.js",
   "scripts": {
-    "prepublish": "rm -rf lib && coffee --bare --output lib/ src/",
-  },
-  "dependencies": {
-  },
-  "devDependencies": {
-    "mocha": "1.11.0",
-    "chai": "1.7.0"
+    "prepublish": "coffee --bare --output lib/ src/"
   }
 }

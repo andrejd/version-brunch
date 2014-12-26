@@ -34,7 +34,7 @@ class VersionBrunch
     #  window.#{@options.nameSpace}.package = #{JSON.stringify(@options.fileTransform(packageInfos), null, 2)};
     # "
     # fs.writeFileSync(filePath, fileString);
-
+    console.log "Hello from Version brunch plugin!!!!"
     return
 
 module.exports = VersionBrunch

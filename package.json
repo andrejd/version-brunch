@@ -10,6 +10,6 @@
   },
   "main": "./lib/index.js",
   "scripts": {
-    "prepublish": "coffee --bare --output lib/ src/"
+    "postinstall": "coffee --bare --output lib/ src/"
   }
 }

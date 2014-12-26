@@ -8,10 +8,9 @@
     "type": "git",
     "url": "git@github.com:AndrejD/version-brunch.git"
   },
-  "main": "./lib/index",
+  "main": "./lib/index.js",
   "scripts": {
     "prepublish": "rm -rf lib && coffee --bare --output lib/ src/",
-    "test": "node_modules/.bin/mocha --require test/common.js"
   },
   "dependencies": {
   },

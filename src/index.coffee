@@ -27,14 +27,39 @@ class VersionBrunch
 
   # Handler executed on compilation
   onCompile: (generatedFiles) ->
-    #packageInfos = require("#{__dirname}#{'/../../'}#{@options.fileSource}")
-    #filePath = path.join(@config.paths.public,"js", @options.fileName)
-    #fileString = "
-    #  window.#{@options.nameSpace} = window.#{@options.nameSpace} ||{};
-    #  window.#{@options.nameSpace}.package = #{JSON.stringify(@options.fileTransform(packageInfos), null, 2)};
-    # "
-    # fs.writeFileSync(filePath, fileString);
-    console.log "Hello from Version brunch plugin!!!!"
+    path = __dirname + "\\..\\..\\..\\"
+    # read or create version file
+    try
+      version = require(path + this.options.versionFile);
+    catch e
+      version =
+        version:"0:0:0:0"
+
+      if e.code === 'MODULE_NOT_FOUND'
+          fs.writeFileSync path + this.options.versionFile, JSON.stringify(version)
+      else
+        console.log(e);
+
+    build = version.version.split '.'
+    console.log build.length
+
+    # read package.json file
+    try
+      pckg = require path + this.options.packageFile
+      console.log pckg.version
+    catch e
+      if e.code === 'MODULE_NOT_FOUND'
+        # package file not found ... just increment build
+      else
+        console.log("[version-brunch ERROR] " + e);
+
+
+
+
+
+
+
+
     return
 
 module.exports = VersionBrunch

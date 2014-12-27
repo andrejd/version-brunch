@@ -14,11 +14,10 @@ class VersionBrunch
 
     # Defaults options
     @options =
-      fileName: 'package.js'
-      fileSource: "package.json"
-      nameSpace: "app"
-      fileTransform:
-        (data)-> return data
+      versionFile: "version.json"
+      packageFile: "package.json"
+      projectRoot: __dirname + "\\..\\..\\..\\"
+
 
     # Merge config
     cfg = @config.plugins?.package ? @config.package ? {}
@@ -27,37 +26,37 @@ class VersionBrunch
 
   # Handler executed on compilation
   onCompile: (generatedFiles) ->
-    path = __dirname + "\\..\\..\\..\\"
+    path = @options.projectRoot
+
     # read or create version file
     try
-      version = require(path + this.options.versionFile);
+      version = require(path + @options.versionFile);
     catch e
+      console.error(e);
       version =
-        version:"0:0:0:0"
-
-      if e.code === 'MODULE_NOT_FOUND'
-          fs.writeFileSync path + this.options.versionFile, JSON.stringify(version)
-      else
-        console.log(e);
-
-    build = version.version.split '.'
-    console.log build.length
+        version:"0.0.0.0"
 
     # read package.json file
     try
-      pckg = require path + this.options.packageFile
-      console.log pckg.version
+      pckg = require(path + @options.packageFile).version
     catch e
-      if e.code === 'MODULE_NOT_FOUND'
-        # package file not found ... just increment build
+      console.error(e);
+
+    bld = version.version.split('.')
+
+    # increase build number or reset it if version is different than saved one
+    if bld.length == 4 # all data present
+      if pckg == bld.slice(0,-1).join('.')
+        bld[3] = parseInt(bld[3]) + 1
+        version.version = bld.join '.'
       else
-        console.log("[version-brunch ERROR] " + e);
+        if pckg == "" then pckg = "0.0.0"
+        version.version = pckg + '.1'
+    else
+      console.error "Error: version.json file is corrupted! After deletion it will be recreated!"
 
-
-
-
-
-
+    # save version to file
+    fs.writeFileSync path + @options.versionFile, JSON.stringify(version)
 
 
     return

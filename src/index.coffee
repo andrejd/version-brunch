@@ -2,7 +2,7 @@ path = require 'path'
 fs  = require 'fs'
 
 ###
-  A short plugin in order to add a package.js file with the list of files.
+  A short plugin which counts compilations for each package version and stores it into version.json file.
 ###
 class VersionBrunch
   # Tell brunch this is a plugin
@@ -26,38 +26,42 @@ class VersionBrunch
 
   # Handler executed on compilation
   onCompile: (generatedFiles) ->
-    path = @options.projectRoot
 
     # read or create version file
     try
-      version = require(path + @options.versionFile);
+      version = require @options.projectRoot + @options.versionFile
     catch e
-      console.error(e);
       version =
-        version:"0.0.0.0"
+        versionExt:"0.0.0.0"
 
     # read package.json file
     try
-      pckg = require(path + @options.packageFile).version
+      pckg = require @options.projectRoot + @options.packageFile
     catch e
-      console.error(e);
+      pckg =
+        version:"0.0.0"
 
-    bld = version.version.split('.')
+    unless version.versionExt? then version.versionExt = "0.0.0.0"
+    bld = version.versionExt.split '.'
+
+    # if version file is the same as package file, work with package file
+    if @options.packageFile == @options.versionFile
+      version = pckg
 
     # increase build number or reset it if version is different than saved one
     if bld.length == 4 # all data present
-      if pckg == bld.slice(0,-1).join('.')
+
+      if pckg.version == bld.slice(0, -1).join '.'
         bld[3] = parseInt(bld[3]) + 1
-        version.version = bld.join '.'
+        version.versionExt = bld.join '.'
       else
-        if pckg == "" then pckg = "0.0.0"
-        version.version = pckg + '.1'
+        version.versionExt = pckg.version + '.1'
+
     else
-      console.error "Error: version.json file is corrupted! After deletion it will be recreated!"
+      console.error "Error: #{@options.packageFile} file is corrupted! After deletion it will be recreated!"
 
-    # save version to file
-    fs.writeFileSync path + @options.versionFile, JSON.stringify(version)
-
+    # save version to file, prety print
+    fs.writeFileSync @options.projectRoot + @options.versionFile, JSON.stringify version, undefined, 2
 
     return
 

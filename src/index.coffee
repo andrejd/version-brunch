@@ -20,7 +20,7 @@ class VersionBrunch
 
 
     # Merge config
-    cfg = @config.plugins?.package ? @config.package ? {}
+    cfg = @config.plugins?.version ? @config.version ? {}
     @options[k] = cfg[k] for k of cfg
 
 

@@ -1,7 +1,7 @@
 {
   "name": "version-brunch",
-  "version": "0.0.1",
-  "description": "Adds app version support to brunch.",
+  "version": "1.0.0",
+  "description": "Adds application version support to brunch.io",
   "author": "Andrej Debeljak",
   "homepage": "https://github.com/AndrejD/version-brunch",
   "repository": {
@@ -11,5 +11,8 @@
   "main": "./lib/index.js",
   "scripts": {
     "postinstall": "coffee --bare --output lib/ src/"
+  },
+  "dependencies": {
+    "filter-files": "^0.4.0"
   }
 }

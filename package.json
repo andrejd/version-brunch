@@ -13,6 +13,7 @@
     "postinstall": "coffee --bare --output lib/ src/"
   },
   "dependencies": {
+    "coffee-script": "^1.8.0",
     "filter-files": "^0.4.0"
   }
 }

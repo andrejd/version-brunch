@@ -1,12 +1,12 @@
 {
   "name": "version-brunch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Adds application version support to brunch.io",
   "author": "Andrej Debeljak",
-  "homepage": "https://github.com/AndrejD/version-brunch",
+  "homepage": "https://github.com/andrejd/version-brunch",
   "repository": {
     "type": "git",
-    "url": "git@github.com:AndrejD/version-brunch.git"
+    "url": "git@github.com:andrejd/version-brunch.git"
   },
   "main": "./lib/index.js",
   "scripts": {

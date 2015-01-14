@@ -3,9 +3,13 @@ Adds application version support to
 [brunch.io](http://brunch.io)
 
 ### Installation
+
+Install the plugin via npm with `npm install --save version-brunch`.
+
+Or, do manual install by adding text below to your package file inside your brunch application:
 Install plugin manually by adding text below to your package file inside your `brunch` application:
 
-`"version-brunch": "https://github.com/AndrejD/version-brunch.git"`.
+`"version-brunch": "git+https://github.com/andrejd/version-brunch.git"`.
 
 ### Usage
 
@@ -73,4 +77,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-

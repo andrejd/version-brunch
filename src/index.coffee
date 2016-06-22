@@ -26,6 +26,7 @@ class VersionBrunch
   generateDefaultMap: (versionExt)->
     map = {}
     # 1.1.1.1 (major.minor.maintenance.build)
+    map["{!version!}"]     = parseInt versionExt;
     map["{!major!}"]       = parseInt versionExt.split('.')[0];
     map["{!minor!}"]       = parseInt versionExt.split('.')[1];
     map["{!maintenance!}"] = parseInt versionExt.split('.')[2];
